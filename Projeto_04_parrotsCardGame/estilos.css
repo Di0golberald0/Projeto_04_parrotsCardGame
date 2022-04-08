@@ -1,10 +1,13 @@
+body {
+    background-color: #EEF9BF;
+}
+
 .corpo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #E5E5E5;
 }
 
 .titulo {
@@ -12,6 +15,7 @@
     justify-content: center;
     align-items: center;
 
+    height: 63px;
     margin-top: 40px;
     margin-bottom: 47px;
     height: 63px;
@@ -19,15 +23,17 @@
     font-weight: 700;
     letter-spacing: -0.004em;
     color: rgba(117, 183, 158, 1);
+    background-color: blue;
 }
 
 .card-space {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: space-between;
 
-    width: 100%;
-    background-color: rgba(117, 183, 158, 1);
+    width: 872px;
+    background-color: red;
 }
 
 
@@ -36,8 +42,10 @@
     justify-content: center;
     align-items: center;
 
-    width: 117px;
+    width: 118px;
     height: 146px;
+    margin-bottom: 16px;
+    margin-right: 16px;
 
     background: #A7E9AF;
     border: 1px solid #99CEA8;
@@ -49,6 +57,6 @@
     height: 100px;
 }
 
-.verso {
+.escondido {
     display: none;
 }

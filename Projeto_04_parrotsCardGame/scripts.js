@@ -11,6 +11,10 @@ let numCartas = prompt("Com quantas cartas você quer jogar?");
 let numPares = numCartas/2;
 let numJogadas = 0;
 
+let minutos = 0;
+let segundos = 0;
+let temporizador;
+
 if(numCartas < 4 || numCartas%2!==0 || numCartas > 14){
     repetirNumCartas();
 }
@@ -34,6 +38,8 @@ function escolherGifs() {
     }
 
     montarBaralho();
+    temporizador = setInterval(timer,1000);
+    
 }
 
 
@@ -44,15 +50,48 @@ function montarBaralho() {
     for (let i = 0; i < numCartas; i++) {
         baralho.innerHTML += `
         <div class="card " onclick="selecionarCarta(this)">
-         <img class="frente face" src="./Imagens/front.png"/>
-         <img class="verso face escondido" src="${gifsUsados[i]}"/>
+         <img class="frente imagem" src="./Imagens/front.png"/>
+         <img class="verso imagem escondido" src="${gifsUsados[i]}"/>
         </div>
         `;
     }
 }
 
-function selecionarCarta(elemento){
+function timer() {
+    let mostrarMinutos;
+    if(minutos < 10) {
+        mostrarMinutos = `0${minutos}`;
+    }
+    else {
+        mostrarMinutos = `${minutos}`
+    }
+
+    let mostrarSegundos;
+    if(segundos < 10){
+        mostrarSegundos = `0${segundos}`
+    }
+    else{
+        mostrarSegundos = `${segundos}`
+    }
+
+    document.querySelector(".timer").innerHTML = `${mostrarMinutos}:${mostrarSegundos}`;
+
+    console.log(`${mostrarMinutos}:${mostrarSegundos}`)
+
+    segundos++;
+    
+    if(segundos > 59) {
+        segundos = 0;
+        minutos++;
+    }
+}
+
+function selecionarCarta(elemento) {
+    elemento.removeAttribute("onclick");
     let carta = document.querySelector(".selecionado");
+    
+    console.log("elemento = " + elemento)
+    console.log("carta = " + carta)
 
     if(carta === null) {
         elemento.classList.add("selecionado", "primeira");
@@ -84,7 +123,7 @@ function virarCarta() {
 }
 
 function compararCartas() {
-    console.log("comparei")
+    console.log("COMPAREI")
 
     let primeira = document.querySelector(".primeira");
     let segunda = document.querySelector(".segunda");
@@ -106,8 +145,12 @@ function compararCartas() {
     if(primeiraImagem === segundaImagem) {
         primeira.classList.toggle("acertada");
         segunda.classList.toggle("acertada");
-        console.log("acertou")
+
+        console.log("ACERTOU")
+
         numPares--;
+
+        console.log(numPares)
     }
     else {
         frentePrimeira.classList.remove("escondido");
@@ -115,10 +158,14 @@ function compararCartas() {
 
         frenteSegunda.classList.remove("escondido");
         versoSegunda.classList.add("escondido");
-        console.log("Fastao errou")
+
+        console.log("ERROU")
+
+        primeira.setAttribute("onclick", "selecionarCarta(this)");
+        segunda.setAttribute("onclick", "selecionarCarta(this)");
     }
 
-    console.log("desfazer")
+    console.log("DESFIZ")
     primeira.classList.remove("primeira");
     segunda.classList.remove("segunda");
 
@@ -129,17 +176,21 @@ function compararCartas() {
 
 function encerrarJogo() {
     if(minutos > 0){
-        alert("Você ganhou em " + numJogadas +"jogadas e em " + minutos + " minutos e "+ segundos + " segundos");
+        alert("Você ganhou em " + numJogadas +" jogadas e em " + minutos + " minutos e "+ segundos + " segundos");
     }
     else{
-        alert("Você ganhou em " + numJogadas +"jogadas e em " + segundos + " segundos!");
+        alert("Você ganhou em " + numJogadas +" jogadas e em " + segundos + " segundos!");
     }
+    clearInterval(temporizador);
     
     const reiniciar = prompt("Gostaria de jogar novamente?");
     if(reiniciar === "sim") {
         numCartas = prompt("Com quantas cartas você quer jogar?");
         numPares = numCartas/2;
         numJogadas = 0;
+        minutos = 0;
+        segundos = 0;
+        escolherGifs();
     }
     else{
         alert("Obrigado pelo seu tempo!")

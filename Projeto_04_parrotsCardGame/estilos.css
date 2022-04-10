@@ -23,7 +23,6 @@ body {
     font-weight: 700;
     letter-spacing: -0.004em;
     color: rgba(117, 183, 158, 1);
-    background-color: blue;
 }
 
 .card-space {
@@ -33,6 +32,8 @@ body {
     align-items: space-between;
 
     width: 872px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: red;
 }
 
@@ -42,8 +43,8 @@ body {
     justify-content: center;
     align-items: center;
 
-    width: 118px;
-    height: 146px;
+    width: 200px;
+    height: 250px;
     margin-bottom: 16px;
     margin-right: 16px;
 
@@ -52,11 +53,37 @@ body {
     border-radius: 5px;
 }
 
+.face {
+    width: 100%;
+    height: 100%;
+
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+
 .frente {
     width: 100px;
     height: 100px;
 }
 
+.verso {
+    width: 100px;
+    height: 100px;
+    transform: rotateY(180deg);
+  }
+
+.card:active .verso {
+    transform: rotateY(0deg);
+  }
+
+.card:active .frente {
+    transform: rotateY(-180deg);
+  }
+
 .escondido {
+    transition: all 300ms linear;
     display: none;
 }

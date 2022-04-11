@@ -1,5 +1,5 @@
 const gifsPool = ["./Imagens/bobrossparrot.gif", "./Imagens/explodyparrot.gif", "./Imagens/fiestaparrot.gif", "./Imagens/metalparrot.gif", "./Imagens/revertitparrot.gif", "./Imagens/tripletsparrot.gif", "./Imagens/unicornparrot.gif"];
-const gifsUsados = [];
+let gifsUsados = [];
 
 gifsPool.sort(comparador);
 
@@ -104,7 +104,7 @@ function selecionarCarta(elemento) {
         virarCarta();
         elemento.classList.remove("selecionado");
 
-        setTimeout(compararCartas, 2000);
+        setTimeout(compararCartas, 1000);
     }
     else{
         elemento.setAttribute("onclick","selecionarCarta(this)");
@@ -176,6 +176,7 @@ function compararCartas() {
 }
 
 function encerrarJogo() {
+    timer();
     if(minutos > 0){
         alert("Você ganhou em " + numJogadas +" jogadas e em " + minutos + " minutos e "+ segundos + " segundos");
     }
@@ -191,6 +192,7 @@ function encerrarJogo() {
         numJogadas = 0;
         minutos = 0;
         segundos = 0;
+        gifsUsados = [];
         escolherGifs();
     }
     else{

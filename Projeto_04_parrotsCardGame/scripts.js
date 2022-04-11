@@ -176,7 +176,6 @@ function compararCartas() {
 }
 
 function encerrarJogo() {
-    timer();
     if(minutos > 0){
         alert("Você ganhou em " + numJogadas +" jogadas e em " + minutos + " minutos e "+ segundos + " segundos");
     }

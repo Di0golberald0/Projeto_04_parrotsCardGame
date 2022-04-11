@@ -88,24 +88,22 @@ function timer() {
 
 function selecionarCarta(elemento) {
     elemento.removeAttribute("onclick");
-    let carta = document.querySelector(".selecionado");
+    let cartaUm = document.querySelector(".cartaUm");
+    let cartaDois = document.querySelector(".cartaDois");
     
     console.log("elemento = " + elemento)
-    console.log("carta = " + carta)
+    console.log("cartaUm = " + cartaUm)
 
-    if(carta === null) {
-        elemento.classList.add("selecionado", "primeira");
+    if(cartaUm === null) {
+        elemento.classList.add("selecionado", "cartaUm");
         virarCarta();
-        console.log("Sou o selecionado1; " + elemento)
+        elemento.classList.remove("selecionado")
     }
-    else {
-        carta.classList.remove("selecionado")
-        elemento.classList.add("selecionado", "segunda");
-
+    else if(cartaDois === null){
+        elemento.classList.add("selecionado", "cartaDois");
         virarCarta();
-
         elemento.classList.remove("selecionado");
-        console.log("Sou o selecionado2; " + elemento)
+
         setTimeout(compararCartas, 2000);
     }
 }
@@ -125,49 +123,49 @@ function virarCarta() {
 function compararCartas() {
     console.log("COMPAREI")
 
-    let primeira = document.querySelector(".primeira");
-    let segunda = document.querySelector(".segunda");
+    let cartaUm = document.querySelector(".cartaUm");
+    let cartaDois = document.querySelector(".cartaDois");
 
-    let frentePrimeira = document.querySelector(".primeira .frente");
-    let versoPrimeira = document.querySelector(".primeira .verso");
+    let frentecartaUm = document.querySelector(".cartaUm .frente");
+    let versocartaUm = document.querySelector(".cartaUm .verso");
 
-    let frenteSegunda = document.querySelector(".segunda .frente");
-    let versoSegunda = document.querySelector(".segunda .verso");
+    let frentecartaDois = document.querySelector(".cartaDois .frente");
+    let versocartaDois = document.querySelector(".cartaDois .verso");
 
-    const primeiraImagem = document.querySelector(".primeira .verso ").src;
-    const segundaImagem = document.querySelector(".segunda .verso").src;
+    const cartaUmImagem = document.querySelector(".cartaUm .verso ").src;
+    const cartaDoisImagem = document.querySelector(".cartaDois .verso").src;
 
-    console.log("primeira " + primeira)
-    console.log("segunda " + segunda)
-    console.log("primeiraImagem " + primeiraImagem)
-    console.log("segundaImagem " + segundaImagem)
+    console.log("cartaUm " + cartaUm)
+    console.log("cartaDois " + cartaDois)
+    console.log("cartaUmImagem " + cartaUmImagem)
+    console.log("cartaDoisImagem " + cartaDoisImagem)
 
-    if(primeiraImagem === segundaImagem) {
-        primeira.classList.toggle("acertada");
-        segunda.classList.toggle("acertada");
-
-        console.log("ACERTOU")
+    if(cartaUmImagem === cartaDoisImagem) {
+        cartaUm.classList.add("acertada");
+        cartaDois.classList.add("acertada");
 
         numPares--;
-
+        
+        console.log("ACERTOU")
         console.log(numPares)
     }
     else {
-        frentePrimeira.classList.remove("escondido");
-        versoPrimeira.classList.add("escondido");
+        frentecartaUm.classList.remove("escondido");
+        versocartaUm.classList.add("escondido");
 
-        frenteSegunda.classList.remove("escondido");
-        versoSegunda.classList.add("escondido");
+        frentecartaDois.classList.remove("escondido");
+        versocartaDois.classList.add("escondido");
+
+        cartaUm.setAttribute("onclick","selecionarCarta(this)");
+        cartaDois.setAttribute("onclick","selecionarCarta(this)");
 
         console.log("ERROU")
-
-        primeira.setAttribute("onclick", "selecionarCarta(this)");
-        segunda.setAttribute("onclick", "selecionarCarta(this)");
     }
 
+    cartaUm.classList.remove("cartaUm");
+    cartaDois.classList.remove("cartaDois");
+
     console.log("DESFIZ")
-    primeira.classList.remove("primeira");
-    segunda.classList.remove("segunda");
 
     if(numPares === 0) {
         encerrarJogo();

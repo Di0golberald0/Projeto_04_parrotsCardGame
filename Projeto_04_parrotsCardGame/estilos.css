@@ -13,7 +13,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    height: 63px;
+    height: 60px;
     margin: 40px 0px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
@@ -29,7 +29,6 @@ body {
     width: 827px;
     margin-left: 20px;
     margin-right: 20px;
-    background-color: red;
 }
 
 
@@ -59,9 +58,25 @@ body {
 }
 
 .timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     position: fixed;
-    top: 40px;
-    right: 20px;
+    top: 20px;
+    right: 60px;
+
+    height: 60px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.004em;
+    color: rgba(117, 183, 158, 1);
 
     z-index: 1;
+}
+
+@media(max-width: 767px) {
+    .card-space {
+        width: 100%;
+    }
 }

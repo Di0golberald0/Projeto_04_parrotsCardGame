@@ -106,6 +106,9 @@ function selecionarCarta(elemento) {
 
         setTimeout(compararCartas, 2000);
     }
+    else{
+        elemento.setAttribute("onclick","selecionarCarta(this)");
+    }
 }
 
 function virarCarta() {
